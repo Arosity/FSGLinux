@@ -5,6 +5,7 @@
 from pynput import keyboard as kk
 import time
 import findseed as getseed
+import json
 keyboard = kk.Controller()
 
 keys={
@@ -14,9 +15,9 @@ keys={
     'f10':kk.Key.f10,
     'alt':kk.Key.alt
 }
-settings=open('settings.json')
+settings=json.load(open('settings.json'))
 sdel=settings['delay']/1000
-rkey=keys[settings['f10']]
+rkey=keys[settings['hotkey']]
 
 def resetworld(s):
     print("[+] Resetting World")
