@@ -4,7 +4,6 @@ import json
 from multiprocessing import Process, Queue
 import subprocess
 import signal
-
 import socket
 
 old_getaddrinfo = socket.getaddrinfo
@@ -60,8 +59,10 @@ def run():
                     for line in out.splitlines():
                         if b'bh' in line:
                             pid = int(line.split(None, 1)[0])
-                            os.kill(pid, signal.SIGKILL)
+                            try:
+                                os.kill(pid, signal.SIGKILL)
+                            except:
+                                "a"
             
                 return(Q.get())
         i = (i + 1) % num_processes
-    

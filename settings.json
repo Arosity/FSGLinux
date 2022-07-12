@@ -1,6 +1,9 @@
 {
   "filter": "000A000A00000000000A000A00000000000A000A00000000000A000A000000000",
   "thread_count": 10,
-  "delay":20,
-  "hotkey":"f10"
+  "delay":40,
+  "hotkey":"f10",
+  "worldfolder":"/home/ms/.local/share/multimc/instances/1.16.1/.minecraft/saves/",
+  "movefolder":"/home/ms/.local/share/multimc/instances/1.16.1/.minecraft/saves/move/",
+  "ignorechar":"_"
 }
