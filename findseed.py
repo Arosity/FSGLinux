@@ -9,15 +9,19 @@ import socket
 old_getaddrinfo = socket.getaddrinfo
 Q = Queue()
 
+
 def new_getaddrinfo(args, *kwargs):
     resps = old_getaddrinfo(args, *kwargs)
     return [resp for resp in resps if resp[0] == socket.AF_INET]
 
+
 socket.getaddrinfo = new_getaddrinfo
+
 
 def display_seed(verif_data, seed):
     print(f"Seed Found({verif_data['iso']}): {seed}")
     print(f"Temp Token: {verif_data}\n")
+
 
 def run_seed(filter):
     seed = ""
@@ -46,11 +50,11 @@ def run():
     for i in range(num_processes):
         processes.append(Process(target=run_seed, args=(filter,)))
         processes[-1].start()
-        
+
     i = 0
     while True:
         for j in range(len(processes)):
-          
+
             if not processes[j].is_alive():
                 for k in range(len(processes)):
                     processes[k].kill()
@@ -63,6 +67,6 @@ def run():
                                 os.kill(pid, signal.SIGKILL)
                             except:
                                 "a"
-            
+
                 return(Q.get())
         i = (i + 1) % num_processes
