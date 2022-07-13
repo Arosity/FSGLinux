@@ -17,11 +17,14 @@ keys = {
     'tab': kk.Key.tab,
     'enter': kk.Key.enter,
     'f10': kk.Key.f10,
+    'f9': kk.Key.f9,
+    'f3': kk.Key.f3,
     'alt': kk.Key.alt
 }
 settings = json.load(open('settings.json'))
 sdel = settings['delay']/1000
 rkey = keys[settings['hotkey']]
+qkey = keys[settings['quickhotkey']]
 worldfolder = settings['worldfolder']
 movefolder = settings['movefolder']
 ignorechar=settings['ignorechar']
@@ -47,7 +50,7 @@ def moveworlds():
             )
 
 
-def resetworld(s):
+def resetworld(s,r):
     print("[+] Resetting World")
     global sdel
     global rkey
@@ -55,13 +58,22 @@ def resetworld(s):
 
     rk = [
         'esc','tab','tab','tab','tab',
-        'tab','tab','tab','tab','tab',
-        'enter','pause','tab','enter','tab','tab',
-        'tab','enter','tab','tab','enter',
-        'enter','enter','tab','tab','tab',
-        'tab','enter','tab', 'tab','tab','seed','tab','tab','tab','tab','tab','tab','enter'
+        'tab','tab','tab','tab',
+        'enter','pause','tab','enter','tab',
+        'tab','tab','enter','tab','tab',
+        'enter','enter','enter','tab','tab',
+        'tab','tab','enter','tab', 'tab',
+        'tab','seed','tab','tab','tab',
+        'tab','tab','tab','enter'
     ]
-    for i in rk:
+    
+    if r == False:
+        a=rk[1::]
+    else:
+        rk.insert(9,'tab')
+        a=rk
+
+    for i in a:
         if i=="pause":
             time.sleep(1)
         elif i =="seed":
@@ -74,22 +86,22 @@ def resetworld(s):
 
     moveworlds()
 
+def on_release(key):
+    global seed
+    global x
+    if x == 1:
+        if key == rkey or key==qkey:
+            x = 0
+            if key==qkey:
+                resetworld(seed,False)
+            else:
+                resetworld(seed,True)
+            seed = getseed.run()
+            x = 1
 
 print("[+] Starting Listener")
 seed = getseed.run()
 x = 1
-
-
-def on_release(key):
-    global seed
-    global x
-    if key == rkey:
-        if x == 1:
-            x = 0
-            resetworld(seed)
-            seed = getseed.run()
-            x = 1
-
 
 with kk.Listener(
         on_release=on_release) as listener:

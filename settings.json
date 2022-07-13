@@ -3,7 +3,8 @@
   "thread_count": 10,
   "delay":40,
   "hotkey":"f10",
-  "worldfolder":"/home/ms/.local/share/multimc/instances/1.16.1/.minecraft/saves/",
-  "movefolder":"/home/ms/.local/share/multimc/instances/1.16.1/.minecraft/saves/move/",
-  "ignorechar":"_"
+  "quickhotkey":"f9",
+  "ignorechar":"_",
+  "worldfolder":"/home/ms/.local/share/multimc/instances/1.16.11/.minecraft/saves/",
+  "movefolder":"/home/ms/.local/share/multimc/instances/1.16.11/.minecraft/saves/move/"
 }
